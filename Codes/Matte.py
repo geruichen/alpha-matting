@@ -18,7 +18,7 @@ def main():
     input_image = cv2.imread("C19.png")   # Input Composite Image
     input_trimap = cv2.imread("T19.png")  # Input Trimap Image
     input_gt = cv2.imread("GT19.png")     # Input Ground Truth Image
-
+    cv2.imshow('Alpha groundtruth', input_gt)
     input_trimap = input_trimap[:, :, 0] # Get single channel
 
     composite_image = np.asarray(input_image) / 255 # scalling the inputs
@@ -35,7 +35,7 @@ def main():
     UG = np.zeros((dimensions[0], dimensions[1]))
     UG[u_trimap] = 1
 
-    alpha_init = np.zeros((dimensions[0], dimensions[1]) # Initiate Alpha
+    alpha_init = np.zeros((dimensions[0], dimensions[1])) # Initiate Alpha
     alpha_init[f_trimap] = 1
     alpha_init[u_trimap] = numpy.NAN
 
@@ -53,8 +53,9 @@ def main():
     start_time = time.time() # Pass all te parametrs and input for processing
     alpha_temp = calcProcessing(composite_image, r, c, FG, BG, UG, alpha_init, parameters)
     print("--- %s seconds ---" % (time.time() - start_time))
-
+    
     alpha_fin = np.dstack((alpha_temp, alpha_temp, alpha_temp)) # Convert alha into 3 channels
+    cv2.imshow('Alpha from our own Algorithm',alpha_fin)
     extracted_output = composite_image * alpha_fin
     gt_output = composite_image * gt
 
