@@ -15,6 +15,15 @@ The files are:
 
 There is also 3 sample input images that have been called in the code.
 
+Note: Before you make changes in the input pictures, it is necessary to copy one picture in each three types (i.e. 'comp_input'; 'gt_input'; 'map_input') of the pictures in 'Images/INPUT' folder to 'Code' folder before you make changes in the input pictures. 
+
+After doing that, you must also make changes in the input names in line 18, 19, 20 in "Matte.py":
+
+
+18    input_image = cv2.imread("C19.png")   
+19    input_trimap = cv2.imread("T19.png")  
+20    input_gt = cv2.imread("GT19.png")
+
 ****Code Execution****
 
 The main function takes 3 inputs.
