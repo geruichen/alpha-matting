@@ -15,9 +15,9 @@ def getFixed(rgb_image, mask):
 
 
 def main():
-    input_image = cv2.imread("C19.png")   # Input Composite Image (change to name as "C**" if you want to)
-    input_trimap = cv2.imread("T19.png")  # Input Trimap Image (change to name as "T**" if you want to)
-    input_gt = cv2.imread("GT19.png")     # Input Ground Truth Image (change to name as "GT**" if you want to)
+    input_image = cv2.imread("C1.png")   # Input Composite Image (change to name as "C**" if you want to)
+    input_trimap = cv2.imread("T01.png")  # Input Trimap Image (change to name as "T**" if you want to)
+    input_gt = cv2.imread("GT1.png")     # Input Ground Truth Image (change to name as "GT**" if you want to)
     cv2.imshow('Alpha groundtruth', input_gt)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -55,18 +55,17 @@ def main():
     start_time = time.time() # Pass all te parametrs and input for processing
     alpha_temp = calcProcessing(composite_image, r, c, FG, BG, UG, alpha_init, parameters)
     print("--- %s seconds ---" % (time.time() - start_time))
-    
+   
     alpha_fin = np.dstack((alpha_temp, alpha_temp, alpha_temp)) # Convert alha into 3 channels
     cv2.imshow('Alpha from our own Algorithm',alpha_fin)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
     extracted_output = composite_image * alpha_fin
     gt_output = composite_image * gt
-
-    calc_PSNR = cv2.PSNR(extracted_output, gt_output)
-    print(calc_PSNR)
+    calc_PSNR = cv2.PSNR(extracted_output*255, gt_output*255)
+    print('psnr:',calc_PSNR)
     ssim_noise = ssim(gt[:, :, 0], alpha_fin[:, :, 0])
-    print(ssim_noise)
+    print('ssim:',ssim_noise)
     print("Computation Done")
 
 
