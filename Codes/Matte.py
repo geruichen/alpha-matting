@@ -15,9 +15,9 @@ def getFixed(rgb_image, mask):
 
 
 def main():
-    input_image = cv2.imread("C19.png")   # Input Composite Image
-    input_trimap = cv2.imread("T19.png")  # Input Trimap Image
-    input_gt = cv2.imread("GT19.png")     # Input Ground Truth Image
+    input_image = cv2.imread("C19.png")   # Input Composite Image (change to name as "C**" if you want to)
+    input_trimap = cv2.imread("T19.png")  # Input Trimap Image (change to name as "T**" if you want to)
+    input_gt = cv2.imread("GT19.png")     # Input Ground Truth Image (change to name as "GT**" if you want to)
     cv2.imshow('Alpha groundtruth', input_gt)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
